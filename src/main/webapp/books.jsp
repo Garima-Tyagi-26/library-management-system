@@ -61,12 +61,14 @@
             
             <td>
             <a href="update-book?id=<%= book.getId() %>">Edit</a>
+            
             <form action="delete-book" method="post" style="display:inline;">
             <input type="hidden" name="id" value="<%= book.getId() %>">
             <button type="submit" onclick="return confirm('Are you sure you want to delete this book?');">
                 Delete
             </button>
             </form>
+            
             </td>
         </tr>
 
