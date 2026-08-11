@@ -1,0 +1,10 @@
+# Maven build output
+target/
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# Local database configuration
+src/main/resources/db.properties
