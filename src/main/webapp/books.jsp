@@ -23,13 +23,25 @@
     <a href="add-book">Clear</a>
     </form> 
     
-    <br>
+     <br>
 
-    <a href="add-book.jsp">Add New Book</a>
+     <a href="add-book.jsp">Add New Book</a>
+    
+     <br><br>
 
-    <br><br>
+     <a href="issue-book.jsp">Issue Book</a>
 
-    <table border="1" cellpadding="10">
+     &nbsp;&nbsp;
+
+     <a href="return-book.jsp">Return Book</a>
+
+     &nbsp;&nbsp;
+
+     <a href="issued-books">View Issued Books</a>
+
+     <br><br>
+
+     <table border="1" cellpadding="10">
 
         <tr>
             <th>ID</th>
@@ -39,6 +51,7 @@
             <th>Category</th>
             <th>Total Copies</th>
             <th>Available Copies</th>
+            <th>Availability</th>
             <th>Action</th>
         </tr>
 
@@ -60,6 +73,15 @@
             <td><%= book.getAvailableCopies() %></td>
             
             <td>
+                 <% if (book.getAvailableCopies() > 0) { %>
+                          Available
+                 <% } else {  %>
+                          Not Available
+                 <% } %>
+
+            </td>
+
+            <td>
             <a href="update-book?id=<%= book.getId() %>">Edit</a>
             
             <form action="delete-book" method="post" style="display:inline;">
@@ -79,7 +101,7 @@
         %>
 
         <tr>
-            <td colspan="8">No books found.</td>
+           <td colspan="9">No books found.</td>
         </tr>
 
         <%
