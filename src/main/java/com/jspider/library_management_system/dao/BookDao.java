@@ -281,4 +281,88 @@ public class BookDao {
 
         return books;
     }
+    
+    
+    
+    
+    public boolean decreaseAvailableCopies(int bookId) {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        final String DECREASE_AVAILABLE_COPIES_QUERY =
+                "UPDATE book "
+                + "SET available_copies = available_copies - 1 "
+                + "WHERE id = ? AND available_copies > 0";
+
+        try {
+
+            con = ConnectionFactory.getConnectionFactory();
+
+            ps = con.prepareStatement(DECREASE_AVAILABLE_COPIES_QUERY);
+
+            ps.setInt(1, bookId);
+
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+
+                System.out.println("Available copies decreased successfully");
+
+                return true;
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            CloseConnectionUtil.closeConnection(ps, con);
+        }
+
+        return false;
+    }
+    
+    
+    
+    
+    public boolean increaseAvailableCopies(int bookId) {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        final String INCREASE_AVAILABLE_COPIES_QUERY =
+                "UPDATE book "
+                + "SET available_copies = available_copies + 1 "
+                + "WHERE id = ? AND available_copies < total_copies";
+
+        try {
+
+            con = ConnectionFactory.getConnectionFactory();
+
+            ps = con.prepareStatement(INCREASE_AVAILABLE_COPIES_QUERY);
+
+            ps.setInt(1, bookId);
+
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+
+                System.out.println("Available copies increased successfully");
+
+                return true;
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            CloseConnectionUtil.closeConnection(ps, con);
+        }
+
+        return false;
+    }
 }
