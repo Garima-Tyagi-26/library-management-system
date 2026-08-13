@@ -259,4 +259,53 @@ public class MemberDao {
 
         return false;
     }
+    
+    
+    
+    public Member getMemberByUsername(String username) {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        final String GET_MEMBER_BY_USERNAME_QUERY =
+                "SELECT * FROM member WHERE username = ?";
+
+        try {
+
+            con = ConnectionFactory.getConnectionFactory();
+
+            ps = con.prepareStatement(GET_MEMBER_BY_USERNAME_QUERY);
+
+            ps.setString(1, username);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                Member member = new Member();
+
+                member.setId(rs.getInt("id"));
+                member.setName(rs.getString("name"));
+                member.setEmail(rs.getString("email"));
+                member.setPhone(rs.getString("phone"));
+                member.setAddress(rs.getString("address"));
+                member.setMembershipDate(rs.getDate("membership_date"));
+                member.setUsername(rs.getString("username"));
+                member.setPassword(rs.getString("password"));
+
+                return member;
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            CloseConnectionUtil.closeConnection(ps, con);
+        }
+
+        return null;
+    }
 }
