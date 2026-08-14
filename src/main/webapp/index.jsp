@@ -7,7 +7,7 @@
 
 <body>
 
-    <h1>Library Management System</h1>
+    <h1 style="color:red;">Library Management System</h1>
 
     <h2>Book Management</h2>
 
