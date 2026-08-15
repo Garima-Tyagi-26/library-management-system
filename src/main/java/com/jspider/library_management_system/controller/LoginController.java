@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
@@ -31,6 +32,12 @@ public class LoginController extends HttpServlet {
         if (member != null) {
 
             System.out.println("Login successful");
+
+            // Create session
+            HttpSession session = request.getSession();
+
+            // Store logged-in member
+            session.setAttribute("loggedInMember", member);
 
             response.sendRedirect("index.jsp");
 

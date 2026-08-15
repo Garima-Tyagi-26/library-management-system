@@ -1,3 +1,10 @@
+<%@ page import="com.jspider.library_management_system.dto.Member" %>
+
+<%
+    Member loggedInMember =
+            (Member) session.getAttribute("loggedInMember");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +23,18 @@
     <br><br>
 
     <a href="add-book">View All Books</a>
+    
+    <%
+    if (loggedInMember != null) {
+    %>
+           <h3>Welcome, <%= loggedInMember.getName() %>!</h3>
+    <%
+    } else {
+    %>
+           <h3>No user is logged in.</h3>
+    <%
+    }
+    %>
 
 </body>
 </html>
