@@ -28,6 +28,11 @@
     if (loggedInMember != null) {
     %>
            <h3>Welcome, <%= loggedInMember.getName() %>!</h3>
+           
+           <br><br>
+
+           <a href="${pageContext.request.contextPath}/logout">Logout</a>
+
     <%
     } else {
     %>

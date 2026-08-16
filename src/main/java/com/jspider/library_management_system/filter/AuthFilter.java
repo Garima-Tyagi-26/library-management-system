@@ -45,7 +45,7 @@ public class AuthFilter implements Filter {
         } else {
 
             // User is not logged in
-            resp.sendRedirect("login.jsp");
+        	resp.sendRedirect(req.getContextPath() + "/login.jsp");
         }
     }
 }
