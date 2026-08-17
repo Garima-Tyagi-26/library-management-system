@@ -10,30 +10,29 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
 @WebServlet("/delete-member")
 public class DeleteMemberController extends HttpServlet {
 
-    private MemberService memberService = new MemberService();
+        private MemberService memberService = new MemberService();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+        @Override
+        protected void doPost(HttpServletRequest req,
+                HttpServletResponse resp)
+                throws ServletException, IOException {
 
-        String idParameter = req.getParameter("id");
+            int id = Integer.parseInt(req.getParameter("id"));
 
-        int id = Integer.parseInt(idParameter);
+            boolean deleted = memberService.deleteMember(id);
 
-        boolean deleted = memberService.deleteMember(id);
+            if (deleted) {
 
-        if (deleted) {
+                resp.sendRedirect("members");
 
-            System.out.println("Member deleted successfully");
+            } else {
 
-        } else {
-
-            System.out.println("Member not found");
-        }
-
-        resp.sendRedirect("members");
-    }
+                resp.sendRedirect("members?error=delete");
+            }
+      }
+        
 }

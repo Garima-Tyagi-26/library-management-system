@@ -365,4 +365,38 @@ public class BookDao {
 
         return false;
     }
+    
+    
+    public int getTotalBooks() {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        final String GET_TOTAL_BOOKS_QUERY =
+                "SELECT COUNT(*) FROM book";
+
+        try {
+
+            con = ConnectionFactory.getConnectionFactory();
+
+            ps = con.prepareStatement(GET_TOTAL_BOOKS_QUERY);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            CloseConnectionUtil.closeConnection(ps, con);
+        }
+
+        return 0;
+    }
 }

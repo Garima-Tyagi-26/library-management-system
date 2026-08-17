@@ -264,4 +264,40 @@ public class IssuedBookDao {
 
         return issuedBooks;
     }
+    
+    
+    
+    public int getTotalIssuedBooks() {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        final String GET_TOTAL_ISSUED_BOOKS_QUERY =
+                "SELECT COUNT(*) FROM issued_book "
+                + "WHERE return_date IS NULL";
+
+        try {
+
+            con = ConnectionFactory.getConnectionFactory();
+
+            ps = con.prepareStatement(GET_TOTAL_ISSUED_BOOKS_QUERY);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            CloseConnectionUtil.closeConnection(ps, con);
+        }
+
+        return 0;
+    }
 }

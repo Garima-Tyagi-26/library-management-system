@@ -308,4 +308,39 @@ public class MemberDao {
 
         return null;
     }
+    
+    
+    
+    public int getTotalMembers() {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        final String GET_TOTAL_MEMBERS_QUERY =
+                "SELECT COUNT(*) FROM member";
+
+        try {
+
+            con = ConnectionFactory.getConnectionFactory();
+
+            ps = con.prepareStatement(GET_TOTAL_MEMBERS_QUERY);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            CloseConnectionUtil.closeConnection(ps, con);
+        }
+
+        return 0;
+    }
 }

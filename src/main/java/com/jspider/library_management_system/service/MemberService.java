@@ -33,4 +33,8 @@ public class MemberService {
 
         return memberDao.deleteMember(id);
     }
+    
+    public int getTotalMembers() {
+        return memberDao.getTotalMembers();
+    }
 }

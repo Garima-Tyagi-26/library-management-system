@@ -149,4 +149,8 @@ public class IssuedBookService {
 
         return issuedBookDao.getAllIssuedBooks();
     }
+    
+    public int getTotalIssuedBooks() {
+        return issuedBookDao.getTotalIssuedBooks();
+    }
 }

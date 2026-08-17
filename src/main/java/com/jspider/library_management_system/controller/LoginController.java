@@ -41,7 +41,8 @@ public class LoginController extends HttpServlet {
             // Store logged-in member
             session.setAttribute("loggedInMember", member);
 
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect("dashboard");
+            
         } else {
 
             System.out.println("Invalid username or password");

@@ -70,4 +70,9 @@ public class BookService {
     public List<Book> searchBooks(String keyword) {
         return bookDao.searchBooks(keyword);
     }
+    
+    
+    public int getTotalBooks() {
+        return bookDao.getTotalBooks();
+    }
 }
